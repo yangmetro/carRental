@@ -1,23 +1,18 @@
-
+import React from 'react';
 import './App.css';
+import Header from '../Header/Header.js';
+import Display from '../Display/Display.js';
+import { Routes, Route } from 'react-router-dom';
 
 function App() {
+
   return (
     <div className="App">
-      <header className="App-header">
-        
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Header/>
+      <Routes>
+        <Route exact path='/display' component={Display} />
+      </Routes>
+      
     </div>
   );
 }

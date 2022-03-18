@@ -1,0 +1,26 @@
+.topbar {
+    align-items: left;
+    position: relative;
+    background-color: black;
+    height: 120px;
+    font-size: 20px;
+}
+.left {
+    display: flex;
+    align-items: center;
+}
+.title {
+    color: white;
+    align-items: left;
+    position: relative;
+    justify-content: left;
+    font-size: 40px;
+    text-decoration: none;
+    top: 20px;
+}
+.right {
+    position: relative;
+    text-align: right;
+    top: -50px;
+    right: 20px;
+}

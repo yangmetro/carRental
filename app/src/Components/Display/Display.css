@@ -1,0 +1,19 @@
+.showTeams{
+    width: 300px;
+    height: 50px;
+    margin-top: 15px;
+    align-items: center;
+}
+.teamList {
+    align-items: center;
+}
+.team{
+    width: 40%;
+    left: 29%;
+    height: 150px;
+    margin: 10px;
+    border: 1px solid black;
+    border: 1px solid black;
+    position: relative;
+    text-align: center;
+}
