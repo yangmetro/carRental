@@ -14,6 +14,7 @@ const db = mysql.createConnection({
     password: 'cs348carRental',
 });
 
+
 app.get('/display', (req, res) => {
     db.query(
         "SELECT * FROM Vehicles",
