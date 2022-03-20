@@ -1,6 +1,7 @@
 import React from "react";
 import './AddVehicle.css';
 import {useState} from 'react';
+import axios, { Axios } from "axios";
 
 function AddVehicle() {
     const [model, setModel] = useState('');
@@ -9,6 +10,7 @@ function AddVehicle() {
     const [mileage, setMileage] = useState(0);
     const [dailyPrice, setPrice] = useState(0);
     const [location, setLocation] = useState('');
+    const [owner_id, setOwner] = useState(1);
 
 
     const handleModel = event => setModel(event.target.value);
@@ -19,14 +21,16 @@ function AddVehicle() {
     const handleLocation = event => setLocation(event.target.value);
 
     const addVehicle = () => {
-        console.log("Input Details");
-        console.log(model);
-        console.log(licensePlate);
-        console.log(state);
-        console.log(mileage);
-        console.log(dailyPrice);
-        console.log(location);
-    }
+        Axios.post('http://localhost:3001/addvehicle', {
+            owner_id:owner_id,
+            model:model,
+            licensePlate:licensePlate,
+            state:state,
+            mileage:mileage,
+            dailyPrice:dailyPrice,
+            location:location
+        });
+    };
 
     return (
         <div>
@@ -35,9 +39,7 @@ function AddVehicle() {
                 name='model'
                 type='text'
                 placeholder='Enter Car model'
-                onChange={handleModel}/*{(event) => {
-                    setModel(event.target.value)
-                }}*/
+                onChange={handleModel}
             />
             <br/>
             <input
@@ -45,7 +47,7 @@ function AddVehicle() {
                 name='licensePlate'
                 type='text'
                 placeholder='License Plate No.'
-                onChange={handlePlate}/*{(event) => {setModel(event.target.value)}}*/
+                onChange={handlePlate}
             />
             <br/>
             <input
