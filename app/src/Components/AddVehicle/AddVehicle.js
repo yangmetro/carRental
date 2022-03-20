@@ -1,6 +1,5 @@
 import React from "react";
 import './AddVehicle.css';
-import Axios from 'axios';
 import {useState} from 'react';
 
 function AddVehicle() {
@@ -40,6 +39,7 @@ function AddVehicle() {
                     setModel(event.target.value)
                 }}*/
             />
+            <br/>
             <input
                 className='carInput'
                 name='licensePlate'
@@ -47,6 +47,7 @@ function AddVehicle() {
                 placeholder='License Plate No.'
                 onChange={handlePlate}/*{(event) => {setModel(event.target.value)}}*/
             />
+            <br/>
             <input
                 className='carInput'
                 name='state'
@@ -54,6 +55,7 @@ function AddVehicle() {
                 placeholder='State'
                 onChange={handleState}
             />
+            <br/>
             <input
                 className='carInput'
                 name='mileage'
@@ -61,6 +63,7 @@ function AddVehicle() {
                 placeholder='Current Mileage'
                 onChange={handleMileage}
             />
+            <br/>
             <input
                 className='carInput'
                 name='dailyPrice'
@@ -68,6 +71,7 @@ function AddVehicle() {
                 placeholder='Enter Desired Daily Price'
                 onChange={handlePrice}
             />
+            <br/>
             <input
                 className='carInput'
                 name='location'
@@ -76,7 +80,7 @@ function AddVehicle() {
                 onChange={handleLocation}
             />
             <div>
-                <button className='Account-button' onClick={addVehicle}>Add Vehicle</button>
+                <button className='submitButton' onClick={addVehicle}>Add Vehicle</button>
             </div>
         </div>
     )
