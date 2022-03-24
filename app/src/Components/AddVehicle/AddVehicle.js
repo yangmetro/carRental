@@ -1,7 +1,7 @@
 import React from "react";
 import './AddVehicle.css';
 import {useState} from 'react';
-import axios, { Axios } from "axios";
+import Axios from "axios";
 
 function AddVehicle() {
     const [model, setModel] = useState('');
@@ -10,7 +10,7 @@ function AddVehicle() {
     const [mileage, setMileage] = useState(0);
     const [dailyPrice, setPrice] = useState(0);
     const [location, setLocation] = useState('');
-    const [owner_id, setOwner] = useState(1);
+    const [owner_id, setOwner] = useState(123);
 
 
     const handleModel = event => setModel(event.target.value);
@@ -29,6 +29,8 @@ function AddVehicle() {
             mileage:mileage,
             dailyPrice:dailyPrice,
             location:location
+        }).then((response) => {
+            console.log(response);
         });
     };
 
