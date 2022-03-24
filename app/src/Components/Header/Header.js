@@ -12,7 +12,10 @@ function Header({open, set}) {
                     <a href="/display" className='link2'>Display</a>
                 </div>
                 <div>
-                    <a href='/addvehicle' classname='link2'>Add Vehicle</a>
+                    <a href='/addvehicle' className='link2'>Add Vehicle</a>
+                </div>
+                <div>
+                    <a href='/removevehicle' className='link2'>Remove Vehicle</a>
                 </div>
 
             </div>
