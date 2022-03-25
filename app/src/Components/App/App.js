@@ -2,6 +2,8 @@ import React from 'react';
 import './App.css';
 import Header from '../Header/Header.js';
 import Display from '../Display/Display.js';
+import AddVehicle from '../AddVehicle/AddVehicle.js';
+import RemoveVehicle from '../RemoveVehicle/RemoveVehicle.js';
 import { Routes, Route } from 'react-router-dom';
 
 function App() {
@@ -11,6 +13,8 @@ function App() {
       <Header/>
       <Routes>
         <Route exact path='/display' element={<Display />} />
+        <Route exact path='/addvehicle' element={<AddVehicle />} />
+        <Route exact path='/removevehicle' element={<RemoveVehicle/>}/>
       </Routes>
       
     </div>
