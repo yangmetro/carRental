@@ -38,7 +38,7 @@ app.post('/addvehicle', (req, res) => {
     const location = req.body.location;
     console.log("Inserting");
     db.query(
-        "INSERT INTO Vehicles (owner_id, model, license_plate, state, mileage, daily_cost, location) VALUES (?, ?, ?, ?, ?, ?, ?);",
+        "INSERT INTO Vehicles (user_id, model, license_plate, state, mileage, daily_cost, location) VALUES (?, ?, ?, ?, ?, ?, ?);",
         [owner_id, model, licensePlate, state, mileage, dailyPrice, location],
         (err, result) => {
             if (err) {
@@ -54,7 +54,7 @@ app.post('/removevehicle', (req, res) => {
     const owner_id = req.body.owner_id;
     const licensePlate = req.body.licensePlate;
     db.query(
-        "DELETE FROM Vehicles WHERE owner_id=? AND license_plate=?;",
+        "DELETE FROM Vehicles WHERE user_id=? AND license_plate=?;",
         [owner_id, licensePlate],
         (err, result) => {
             if (err) {
