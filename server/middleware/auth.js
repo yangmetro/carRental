@@ -1,5 +1,4 @@
 const jwt = require("jsonwebtoken");
-const config = require("config");
 
 // DEVELOPMENT ONLY. Move to environment variable later.
 const jwtSecret = "secret";

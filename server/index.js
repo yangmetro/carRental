@@ -14,6 +14,8 @@ db.connect(function (err) {
 app.use(cors());
 app.use(express.json());
 
+app.use("/api/users", require("./routes/users"));
+
 app.get("/display", (req, res) => {
   db.query("SELECT * FROM Vehicles", (err, result) => {
     if (err) {
