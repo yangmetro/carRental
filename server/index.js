@@ -15,6 +15,7 @@ app.use(cors());
 app.use(express.json());
 
 app.use("/api/users", require("./routes/users"));
+app.use("/api/auth", require("./routes/auth"));
 
 app.get("/display", (req, res) => {
   db.query("SELECT * FROM Vehicles", (err, result) => {

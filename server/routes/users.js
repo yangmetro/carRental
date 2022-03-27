@@ -12,7 +12,7 @@ router.post("/", async (req, res) => {
   const { user_name, password, email, phone, user_type } = req.body;
 
   // Check if user already exists
-  let exists = false;
+
   db.query(
     "SELECT * FROM User WHERE user_name = ?;",
     [user_name],
@@ -24,8 +24,12 @@ router.post("/", async (req, res) => {
       }
 
       // Encrypt password
+      console.log(password);
+
       const salt = await bcrypt.genSalt(10);
       const saltedPassword = await bcrypt.hash(password, salt);
+
+      console.log(saltedPassword);
 
       // Insert user
       db.query(
