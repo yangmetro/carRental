@@ -9,7 +9,15 @@ const db = require("../config/db");
 // @desc    Register a user
 // @access  Public
 router.post("/", async (req, res) => {
-  const { user_name, password, email, phone, user_type } = req.body;
+  const {
+    user_name,
+    first_name,
+    last_name,
+    password,
+    email,
+    phone,
+    user_type,
+  } = req.body;
 
   // Check if user already exists
 
@@ -33,8 +41,16 @@ router.post("/", async (req, res) => {
 
       // Insert user
       db.query(
-        "INSERT INTO User(user_name, password, email, phone, user_type) VALUES(?, ?, ?, ?, ?);",
-        [user_name, saltedPassword, email, phone, user_type],
+        "INSERT INTO User(user_name, first_name, last_name, password, email, phone, user_type) VALUES(?, ?, ?, ?, ?, ?, ?);",
+        [
+          user_name,
+          first_name,
+          last_name,
+          saltedPassword,
+          email,
+          phone,
+          "Renter",
+        ],
         (err, result) => {
           if (err) {
             return res.status(400).send({ msg: err });
