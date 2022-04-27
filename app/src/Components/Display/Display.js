@@ -5,6 +5,7 @@ import {useState} from 'react';
 
 function Display() {
     const [availableCars, setAvailableCars] = useState([]);
+    //const [selectedCar, setSelectedCar] = useState();
     const getCars = () => {
         Axios.get('http://localhost:3001/display').then((response) => {
             if (response.data.length === 0) {
@@ -15,6 +16,12 @@ function Display() {
             }
         });
     };
+    
+    const rentCars = (vehicle_id) => {
+        //Axios.post('http://localhost:3001/rentCars');
+        console.log(vehicle_id);
+    };
+    
     return (
         <div>
             <button className='showCars' onClick={getCars}>
@@ -24,7 +31,11 @@ function Display() {
                 {availableCars.map((val, key) => {
                     return (
                         <div className='car' key={val.vehicle_id}>
-                            <h1>{val.state + " " + val.license_plate}</h1>
+                            <h1>{"Vehicle: " + val.vehicle_id}</h1>
+                            <h1>{"Daily Cost : " + val.daily_cost}</h1>
+                            <button className='rentCar' onClick={() => rentCars(val.vehicle_id)}>
+                                Rent
+                            </button>
                         </div>  
                     );
                 })}
