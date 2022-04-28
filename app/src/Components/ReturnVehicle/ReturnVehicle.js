@@ -7,7 +7,6 @@ import moment from 'moment';
 function ReturnVehicle() {
     const [rentedCars, setRentedCars] = useState([]);
     const [user_id, setUserId] = useState(136);
-    const [toReturn, setReturnId] = useState();
 
     useEffect(() => {
         console.log(user_id);
@@ -32,8 +31,8 @@ function ReturnVehicle() {
             rental_id:rental_id
         }).then((response) => {
             
-        })
-    }
+        });
+    };
 
     return (
         <div>
