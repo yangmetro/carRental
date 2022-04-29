@@ -3,7 +3,9 @@ import './Display.css';
 import Axios from 'axios';
 import {useState} from 'react';
 
-function Display() {
+const Display = ({
+    user_id
+}) => {
     const [availableCars, setAvailableCars] = useState([]);
     //const [selectedCar, setSelectedCar] = useState();
     const getCars = () => {
@@ -17,9 +19,15 @@ function Display() {
         });
     };
     
-    const rentCars = (vehicle_id) => {
-        //Axios.post('http://localhost:3001/rentCars');
-        console.log(vehicle_id);
+    const rentCars = (val) => {
+        Axios.post('http://localhost:3001/rentCars', {
+            renter_id: user_id,
+            vehicle_id: val.vehicle_id,
+            owner_id: val.user_id
+        }).then((response) => {
+            console.log(response);
+        });
+        console.log(val.vehicle_id);
     };
     
     return (
@@ -33,7 +41,7 @@ function Display() {
                         <div className='car' key={val.vehicle_id}>
                             <h1>{"Vehicle: " + val.vehicle_id}</h1>
                             <h1>{"Daily Cost : " + val.daily_cost}</h1>
-                            <button className='rentCar' onClick={() => rentCars(val.vehicle_id)}>
+                            <button className='rentCar' onClick={() => rentCars(val)}>
                                 Rent
                             </button>
                         </div>  

@@ -3,7 +3,10 @@ import "./Login.css";
 import { useState } from "react";
 import axios from "axios";
 
-const Login = () => {
+const Login = ({
+  user_id1,
+  setUser1
+}) => {
   const [user, setUser] = useState({
     user_name: "",
     password: "",
@@ -11,7 +14,10 @@ const Login = () => {
 
   const { user_name, password } = user;
 
-  const onChange = (e) => setUser({ ...user, [e.target.name]: e.target.value });
+  const onChange = (e) => {
+    setUser({ ...user, [e.target.name]: e.target.value });
+    setUser1();
+}
 
   const onSubmit = async (e) => {
     e.preventDefault();

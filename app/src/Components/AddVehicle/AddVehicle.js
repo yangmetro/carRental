@@ -3,14 +3,16 @@ import './AddVehicle.css';
 import {useState} from 'react';
 import Axios from "axios";
 
-function AddVehicle() {
+const AddVehicle = ({
+    user_id
+}) => {
     const [model, setModel] = useState('');
     const [licensePlate, setPlate] = useState('');
     const [state, setState] = useState('');
     const [mileage, setMileage] = useState(0);
     const [dailyPrice, setPrice] = useState(0);
     const [location, setLocation] = useState('');
-    const [owner_id, setOwner] = useState(123);
+    //const [owner_id, setOwner] = useState(123);
 
 
     const handleModel = event => setModel(event.target.value);
@@ -22,7 +24,7 @@ function AddVehicle() {
 
     const addVehicle = () => {
         Axios.post('http://localhost:3001/addvehicle', {
-            owner_id:owner_id,
+            owner_id:user_id,
             model:model,
             licensePlate:licensePlate,
             state:state,
