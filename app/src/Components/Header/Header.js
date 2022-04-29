@@ -35,6 +35,11 @@ function Header({ open, set }) {
             Remove Vehicle
           </a>
         </div>
+        <div>
+          <a href="/returnvehicle" className="link2">
+            Return Vehicle
+          </a>
+        </div>
       </div>
     </div>
   );
