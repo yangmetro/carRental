@@ -102,6 +102,36 @@ app.post('/rentCars', (req,res) => {
   });
 });
 
+app.post("/displayRented", (req, res) => {
+  const user_id = req.body.user_id;
+  console.log("user_id: " + user_id);
+  db.query(
+    "SELECT * FROM Rentals r LEFT JOIN Vehicles v ON v.vehicle_id=r.vehicle_id WHERE r.renter_id = ? AND r.end_date IS NULL;",
+    [user_id],
+    (err, result) => {
+      if (err) {
+        console.log(err);
+      } else {
+        res.send(result);
+      }
+    }
+  );
+});
+
+app.post("/return", (req, res) => {
+  const end_date = req.body.end_date;
+  const rental_id = req.body.rental_id;
+  db.query("CALL finalizeRentalCost(?, ?);",
+  [end_date, rental_id],
+  (err, result) => {
+    if (err) {
+      console.log(err);
+    } else {
+      res.send(result);
+    }
+  });
+});
+
 app.listen(3001, () => {
   console.log("Server is running");
 });
