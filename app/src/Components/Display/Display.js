@@ -3,8 +3,12 @@ import './Display.css';
 import Axios from 'axios';
 import {useState} from 'react';
 
-function Display() {
+const Display = ({
+    user_id
+}) => {
     const [availableCars, setAvailableCars] = useState([]);
+    const [userId, setUserID] = useState(138);
+    //const [selectedCar, setSelectedCar] = useState();
     const getCars = () => {
         Axios.get('http://localhost:3001/display').then((response) => {
             if (response.data.length === 0) {
@@ -15,6 +19,21 @@ function Display() {
             }
         });
     };
+    
+    const rentCars = (val) => {
+        const date = new Date();
+        Axios.post('http://localhost:3001/rentCars', {
+            renter_id: userId,
+            vehicle_id: val.vehicle_id,
+            owner_id: val.user_id,
+            start_date: date,
+            miles: val.mileage
+        }).then((response) => {
+            console.log(response);
+        });
+        //console.log(val.vehicle_id);
+    };
+    
     return (
         <div>
             <button className='showCars' onClick={getCars}>
@@ -24,7 +43,11 @@ function Display() {
                 {availableCars.map((val, key) => {
                     return (
                         <div className='car' key={val.vehicle_id}>
-                            <h1>{val.state + " " + val.license_plate}</h1>
+                            <h1>{"Vehicle: " + val.vehicle_id}</h1>
+                            <h1>{"Daily Cost : " + val.daily_cost}</h1>
+                            <button className='rentCar' onClick={() => rentCars(val)}>
+                                Rent
+                            </button>
                         </div>  
                     );
                 })}
