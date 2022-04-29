@@ -15,7 +15,7 @@ function App() {
     <div className="App">
       <Header />
       <Routes>
-        <Route user_id={user_id} setUser={setUser} exact path="/register" element={<Register />} />
+        <Route user_id1={user_id} setUser1={setUser} exact path="/register" element={<Register />} />
         <Route user_id={user_id} exact path="/login" element={<Login />} />
         <Route user_id={user_id} exact path="/display" element={<Display />} />
         <Route user_id={user_id} exact path="/addvehicle" element={<AddVehicle />} />
