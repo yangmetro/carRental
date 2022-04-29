@@ -23,8 +23,9 @@ const AddVehicle = ({
     const handleLocation = event => setLocation(event.target.value);
 
     const addVehicle = () => {
+        console.log(user_id);
         Axios.post('http://localhost:3001/addvehicle', {
-            owner_id:user_id,
+            user_id:user_id,
             model:model,
             licensePlate:licensePlate,
             state:state,
