@@ -104,7 +104,6 @@ app.post('/rentCars', (req,res) => {
 
 app.post("/displayRented", (req, res) => {
   const user_id = req.body.user_id;
-  console.log("user_id: " + user_id);
   db.query(
     "SELECT * FROM Rentals r LEFT JOIN Vehicles v ON v.vehicle_id=r.vehicle_id WHERE r.renter_id = ? AND r.end_date IS NULL;",
     [user_id],

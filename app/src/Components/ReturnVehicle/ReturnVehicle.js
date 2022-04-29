@@ -37,11 +37,12 @@ function ReturnVehicle() {
     return (
         <div>
             <h1>Return Vehicle</h1>
-            <div>
+            <div className='rentalList'>
                 {rentedCars.map((val, key) => {
                     return (
-                        <div key={val.rental_id}>
-                            <h1>{"Vehicle: " + val.license_plate + "\t Rented Since: " + moment(val.start_date).format("MMMM Do YYYY")}</h1>
+                        <div className='rentals' key={val.rental_id}>
+                            <h1>{"Vehicle: " + val.license_plate}</h1> 
+                            <h1>{"Rented Since: " + moment(val.start_date).format("MMMM Do YYYY")}</h1>
                             <button onClick={()=>returnVehicle(val.rental_id)}>Return</button>
                         </div>
                     );
