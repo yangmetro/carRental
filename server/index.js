@@ -77,6 +77,31 @@ app.post("/removevehicle", (req, res) => {
   );
 });
 
+
+app.post('/rentCars', (req,res) => {
+  const owner_id = req.body.owner_id;
+  const renter_id = req.body.renter_id;
+  const vehicle_id = req.body.vehicle_id;
+  const start_date = req.body.start_date;
+  const miles = req.body.miles;
+  db.query(
+  "INSERT INTO Rentals (owner_id, vehicle_id, renter_id, miles, start_date) VALUES (?, ?, ?, ?, ?);",
+  [
+    owner_id,
+    vehicle_id,
+    renter_id,
+    miles,
+    start_date
+  ],
+  (err, result) => {
+    if (err) {
+      console.log(err);
+    } else {
+      res.send(result);
+    }
+  });
+});
+
 app.listen(3001, () => {
   console.log("Server is running");
 });
