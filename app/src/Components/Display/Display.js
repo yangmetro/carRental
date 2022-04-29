@@ -50,7 +50,7 @@ const Display = ({
                             </button>
                         </div>  
                     );
-                })}
+                })} 
             </div>
         </div>
     )

@@ -12,7 +12,7 @@ const AddVehicle = ({
     const [mileage, setMileage] = useState(0);
     const [dailyPrice, setPrice] = useState(0);
     const [location, setLocation] = useState('');
-    //const [owner_id, setOwner] = useState(123);
+    const [owner_id, setOwner] = useState(123);
 
 
     const handleModel = event => setModel(event.target.value);
@@ -25,7 +25,7 @@ const AddVehicle = ({
     const addVehicle = () => {
         console.log(user_id);
         Axios.post('http://localhost:3001/addvehicle', {
-            user_id:user_id,
+            user_id:owner_id,
             model:model,
             licensePlate:licensePlate,
             state:state,
