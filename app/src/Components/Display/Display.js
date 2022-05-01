@@ -36,6 +36,7 @@ const Display = ({
         }).then((response) => {
             console.log(response);
         });
+        window.location.reload();
         //console.log(val.vehicle_id);
     };
     
