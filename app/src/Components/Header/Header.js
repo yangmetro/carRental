@@ -40,6 +40,11 @@ function Header({ open, set }) {
             Return Vehicle
           </a>
         </div>
+        <div>
+          <a href="/ownedvehicles" className="link2">
+            View Owned Vehicles
+          </a>
+        </div>
       </div>
     </div>
   );

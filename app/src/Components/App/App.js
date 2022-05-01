@@ -9,6 +9,7 @@ import RemoveVehicle from "../RemoveVehicle/RemoveVehicle.js";
 import { Routes, Route } from "react-router-dom";
 import ReturnVehicle from "../ReturnVehicle/ReturnVehicle";
 import {useState} from 'react';
+import OwnedVehicles from "../ownedVehicles/ownedVehicles.js";
 
 function App() {
   const [user_id, setUser] = useState("");
@@ -22,6 +23,7 @@ function App() {
         <Route user_id={user_id} exact path="/addvehicle" element={<AddVehicle />} />
         <Route user_id={user_id} exact path="/removevehicle" element={<RemoveVehicle />} />
         <Route user_id={user_id} exact path="/returnvehicle" element={<ReturnVehicle />} />
+        <Route user_id={user_id} exact path="/ownedVehicles" element={<OwnedVehicles />} />
       </Routes>
     </div>
   );
