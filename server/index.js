@@ -145,6 +145,29 @@ app.post("/return", (req, res) => {
   });
 });
 
+app.post("/review", (req, res) => {
+  const review = req.body.review;
+  const vehicle_id = req.body.vehicle_id;
+  const rating = req.body.rating;
+  const user_id = req.body.user_id;
+
+  db.query(
+  "INSERT INTO Reviews (vehicle_id, user_id, rating, review) VALUES (?, ?, ?, ?);",
+  [
+    vehicle_id,
+    user_id,
+    rating,
+    review
+  ],
+  (err, result) => {
+    if (err) {
+      console.log(err);
+    } else {
+      res.send(result);
+    }
+  });
+})
+
 app.listen(3001, () => {
   console.log("Server is running");
 });
