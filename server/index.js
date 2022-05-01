@@ -77,13 +77,10 @@ app.post("/removevehicle", (req, res) => {
   );
 });
 
-
-app.post('/rentCars', (req,res) => {
+app.post("/rentCars", (req, res) => {
   const user_id = req.body.user_id;
   const vehicle_id = req.body.vehicle_id;
-  db.query(
-    
-  );
+  db.query();
 });
 
 app.listen(3001, () => {
