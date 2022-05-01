@@ -22,12 +22,17 @@ const Display = ({
     
     const rentCars = (val) => {
         const date = new Date();
-        Axios.post('http://localhost:3001/rentCars', {
+        Axios.post('http://localhost:3001/rentCars1', {
             renter_id: userId,
             vehicle_id: val.vehicle_id,
             owner_id: val.user_id,
             start_date: date,
             miles: val.mileage
+        }).then((response) => {
+            console.log(response);
+        });
+        Axios.post('http://localhost:3001/rentCars2', {
+            vehicle_id: val.vehicle_id,
         }).then((response) => {
             console.log(response);
         });

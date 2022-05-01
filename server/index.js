@@ -18,7 +18,8 @@ app.use("/api/users", require("./routes/users"));
 app.use("/api/auth", require("./routes/auth"));
 
 app.get("/display", (req, res) => {
-  db.query("SELECT * FROM Vehicles WHERE available = 0", (err, result) => {
+  db.query("SELECT * FROM Vehicles WHERE available = 0",
+  (err, result) => {
     if (err) {
       console.log(err);
     } else {
@@ -78,7 +79,7 @@ app.post("/removevehicle", (req, res) => {
 });
 
 
-app.post('/rentCars', (req,res) => {
+app.post('/rentCars1', (req,res) => {
   const owner_id = req.body.owner_id;
   const renter_id = req.body.renter_id;
   const vehicle_id = req.body.vehicle_id;
@@ -100,7 +101,11 @@ app.post('/rentCars', (req,res) => {
       res.send(result);
     }
   });
-  
+});  
+
+
+app.post('/rentCars2', (req,res) => {
+  const vehicle_id = req.body.vehicle_id;
   db.query(
     "UPDATE Vehicles SET status = 'active', available = 1 WHERE vehicle_id = ?;",
     [
@@ -113,8 +118,9 @@ app.post('/rentCars', (req,res) => {
         res.send(result);
       }
     });
+  });
     
-});
+
 
 app.post("/displayRented", (req, res) => {
   const user_id = req.body.user_id;
