@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.css": "/carRental/static/css/main.a53268a3.css",
-    "main.js": "/carRental/static/js/main.9595f498.js",
-    "index.html": "/carRental/index.html",
-    "main.a53268a3.css.map": "/carRental/static/css/main.a53268a3.css.map",
-    "main.9595f498.js.map": "/carRental/static/js/main.9595f498.js.map"
+    "main.css": "https://yangmetro.com/carRental/static/css/main.a53268a3.css",
+    "main.js": "https://yangmetro.com/carRental/static/js/main.9ef2b872.js",
+    "index.html": "https://yangmetro.com/carRental/index.html",
+    "main.a53268a3.css.map": "https://yangmetro.com/carRental/static/css/main.a53268a3.css.map",
+    "main.9ef2b872.js.map": "https://yangmetro.com/carRental/static/js/main.9ef2b872.js.map"
   },
   "entrypoints": [
     "static/css/main.a53268a3.css",
-    "static/js/main.9595f498.js"
+    "static/js/main.9ef2b872.js"
   ]
 }
