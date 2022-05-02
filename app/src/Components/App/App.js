@@ -1,6 +1,6 @@
 import React from "react";
 import "./App.css";
-import Header from "../Header/Header.js";
+import Navbar from "../Navbar/Navbar";
 import Register from "../Register/Register.js";
 import Login from "../Login/Login.js";
 import Display from "../Display/Display.js";
@@ -15,7 +15,7 @@ function App() {
   return (
     <AuthState>
       <div className="App">
-        <Header />
+        <Navbar />
         <Routes>
           <Route
             setUser1={setUser}
