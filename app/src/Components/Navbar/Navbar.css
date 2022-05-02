@@ -5,6 +5,7 @@
 
 .navbar {
   background-color: black;
+  height: 70px;
 }
 
 .navbar::after {
@@ -16,6 +17,7 @@
 .title {
   float: left;
   color: white;
+  padding-top: 10px;
 }
 
 .navbar ul {
@@ -28,7 +30,7 @@
 .navbar li {
   display: inline-block;
   margin-left: 70px;
-  padding-top: 30px;
+  padding-top: 23px;
   position: relative;
 }
 
