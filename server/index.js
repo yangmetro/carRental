@@ -62,8 +62,8 @@ app.post("/addvehicle", auth, (req, res) => {
   );
 });
 
-app.post("/removevehicle", (req, res) => {
-  const user_id = req.body.user_id;
+app.post("/removevehicle", auth, (req, res) => {
+  const user_id = req.user.user_id;
   const licensePlate = req.body.licensePlate;
   db.query(
     "DELETE FROM Vehicles WHERE user_id=? AND license_plate=?;",
