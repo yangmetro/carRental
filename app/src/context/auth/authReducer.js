@@ -22,7 +22,7 @@ const authReducer = (state, action) => {
       return {
         ...state,
         ...action.payload,
-        isAuthenticated,
+        isAuthenticated: true,
         loading: false,
       };
     case REGISTER_FAIL:

@@ -4,6 +4,8 @@ import axios from "axios";
 import AuthContext from "./authContext";
 import authReducer from "./authReducer";
 
+import setAuthToken from "./setAuthToken";
+
 import {
   REGISTER_SUCCESS,
   REGISTER_FAIL,
@@ -26,7 +28,7 @@ export const useAuth = () => {
 // Load User: Gets the logged in user and stores it in global state.
 export const loadUser = async (dispatch) => {
   try {
-    const res = await axios.get("/api/auth");
+    const res = await axios.get("http://localhost:3001/api/auth");
 
     dispatch({
       type: USER_LOADED,
@@ -40,7 +42,7 @@ export const loadUser = async (dispatch) => {
 // Register user: Registers a user, logs them in, and stores it in global state.
 export const register = async (dispatch, formData) => {
   try {
-    const res = await axios.post("/api/users", formData);
+    const res = await axios.post("http://localhost:3001/api/users", formData);
 
     dispatch({
       type: REGISTER_SUCCESS,
@@ -56,7 +58,7 @@ export const register = async (dispatch, formData) => {
 // Login User: Log in user and store in global state.
 export const login = async (dispatch, formData) => {
   try {
-    const res = await axios.post("/api/auth", formData);
+    const res = await axios.post("http://localhost:3001/api/auth", formData);
 
     dispatch({
       type: LOGIN_SUCCESS,

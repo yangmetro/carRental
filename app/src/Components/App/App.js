@@ -7,21 +7,44 @@ import Display from "../Display/Display.js";
 import AddVehicle from "../AddVehicle/AddVehicle.js";
 import RemoveVehicle from "../RemoveVehicle/RemoveVehicle.js";
 import { Routes, Route } from "react-router-dom";
-import {useState} from 'react';
+import { useState } from "react";
+import AuthState from "../../context/auth/AuthState";
 
 function App() {
   const [user_id, setUser] = useState("");
   return (
-    <div className="App">
-      <Header />
-      <Routes>
-        <Route setUser1={setUser} exact path="/register" element={<Register />} />
-        <Route user_id={user_id} exact path="/login" element={<Login />} />
-        <Route user_id={user_id} exact path="/display" element={<Display />} />
-        <Route user_id={user_id} exact path="/addvehicle" element={<AddVehicle />} />
-        <Route user_id={user_id} exact path="/removevehicle" element={<RemoveVehicle />} />
-      </Routes>
-    </div>
+    <AuthState>
+      <div className="App">
+        <Header />
+        <Routes>
+          <Route
+            setUser1={setUser}
+            exact
+            path="/register"
+            element={<Register />}
+          />
+          <Route user_id={user_id} exact path="/login" element={<Login />} />
+          <Route
+            user_id={user_id}
+            exact
+            path="/display"
+            element={<Display />}
+          />
+          <Route
+            user_id={user_id}
+            exact
+            path="/addvehicle"
+            element={<AddVehicle />}
+          />
+          <Route
+            user_id={user_id}
+            exact
+            path="/removevehicle"
+            element={<RemoveVehicle />}
+          />
+        </Routes>
+      </div>
+    </AuthState>
   );
 }
 

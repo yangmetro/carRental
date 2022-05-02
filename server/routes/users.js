@@ -1,6 +1,9 @@
+// routes/users.js -- Handles registration of users
+
 const express = require("express");
 const router = express.Router();
 const bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken");
 
 const auth = require("../middleware/auth");
 const db = require("../config/db");
@@ -56,7 +59,18 @@ router.post("/", async (req, res) => {
             return res.status(400).send({ msg: err });
           }
 
-          return res.status(201).send({ msg: "Registered" });
+          // Generate login token on register
+          const user_id = result.insertId;
+          const payload = {
+            user: {
+              user_id,
+            },
+          };
+
+          jwt.sign(payload, "secret", { expiresIn: 360000 }, (err, token) => {
+            if (err) throw err;
+            res.json({ token });
+          });
         }
       );
     }

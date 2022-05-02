@@ -1,9 +1,15 @@
 import React from "react";
 import "./Register.css";
 import { useState } from "react";
-import axios from "axios";
+import { Navigate } from "react-router-dom";
+
+import { useAuth, register } from "../../context/auth/AuthState";
 
 const Register = () => {
+  // Pull in auth context
+  const [authState, authDispatch] = useAuth();
+  const { isAuthenticated } = authState;
+
   const [user, setUser] = useState({
     first_name: "",
     last_name: "",
@@ -42,22 +48,20 @@ const Register = () => {
       // TODO: Display alert
       console.log("Passwords do not match");
     } else {
-      // Register user
-      try {
-        await axios.post("http://localhost:3001/api/users", {
-          first_name,
-          last_name,
-          user_name,
-          password,
-          email,
-          phone,
-        });
-        console.log("Registered");
-      } catch (err) {
-        console.log(err.response.data.msg);
-      }
+      // Register a user. Defined in AuthState
+      register(authDispatch, {
+        first_name,
+        last_name,
+        user_name,
+        password,
+        email,
+        phone,
+      });
+      console.log("Registered");
     }
   };
+
+  if (isAuthenticated) return <Navigate to="/display" />;
 
   return (
     <div>

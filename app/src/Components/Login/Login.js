@@ -1,11 +1,15 @@
 import React from "react";
 import "./Login.css";
 import { useState } from "react";
-import axios from "axios";
+import { Navigate } from "react-router-dom";
 
-const Login =({
-  setUser1
-}) => {
+import { useAuth, login } from "../../context/auth/AuthState";
+
+const Login = () => {
+  // Pull in auth context
+  const [authState, authDispatch] = useAuth();
+  const { isAuthenticated } = authState;
+
   const [user, setUser] = useState({
     user_name: "",
     password: "",
@@ -15,30 +19,23 @@ const Login =({
 
   const onChange = (e) => {
     setUser({ ...user, [e.target.name]: e.target.value });
-  }
-
+  };
 
   const onSubmit = async (e) => {
     e.preventDefault();
     if (user_name === "" || password === "") {
       // TODO: Display alert
-      console.log("Enter all fields");
+      console.log("Please enter all fields");
     } else {
       // Login user
-      try {
-        let response = await axios.post("http://localhost:3001/api/auth", {
-          user_name,
-          password,
-        });
-        console.log("Successfully logged in");
-        console.log(response.data);
-        console.log(user_name);
-        setUser1(user_name);
-      } catch (err) {
-        //console.log(err.response.data.msg);
-      }
+      login(authDispatch, {
+        user_name,
+        password,
+      });
     }
   };
+
+  if (isAuthenticated) return <Navigate to="/display" />;
 
   return (
     <div>

@@ -12,3 +12,5 @@ const setAuthToken = (token) => {
     localStorage.removeItem("token");
   }
 };
+
+export default setAuthToken;

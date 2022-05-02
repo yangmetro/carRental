@@ -1,3 +1,5 @@
+// routes/auth.js -- Handles logging in of user
+
 const express = require("express");
 const router = express.Router();
 const bcrypt = require("bcryptjs");
@@ -15,6 +17,9 @@ router.get("/", auth, (req, res) => {
     [req.user.user_id],
     (err, result) => {
       if (err) throw err;
+
+      const resultObj = JSON.stringify(result);
+      console.log(resultObj);
 
       const { user_id, user_name, email, phone, user_type } = result[0];
 
@@ -62,6 +67,8 @@ router.post("/", async (req, res) => {
       }
 
       // Create payload based on user_id
+      console.log(`User_id: ${result[0].user_id}`);
+
       const payload = {
         user: {
           user_id: result[0].user_id,
