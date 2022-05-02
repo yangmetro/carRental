@@ -2,6 +2,7 @@ const express = require("express");
 const app = express();
 const mysql = require("mysql");
 const cors = require("cors");
+const auth = require("./middleware/auth");
 
 const db = require("./config/db");
 
@@ -27,8 +28,8 @@ app.get("/display", (req, res) => {
   });
 });
 
-app.post("/addvehicle", (req, res) => {
-  const user_id = req.body.user_id;
+app.post("/addvehicle", auth, (req, res) => {
+  const user_id = req.user.user_id;
   const model = req.body.model;
   const licensePlate = req.body.licensePlate;
   const state = req.body.state;
