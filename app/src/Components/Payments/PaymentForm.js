@@ -1,11 +1,17 @@
 import React, { useState } from "react";
 
 const PaymentForm = (props) => {
-  const { handleSubmit } = this.props;
+  const {
+    submitLabel,
+    handleSubmit,
+    hasCancelButton = false,
+    handleCancel,
+  } = props;
 
+  // Initial State
   const initialPayment = {
     payment_name: "",
-    payment_type: "credit",
+    payment_type: "",
     card_number: "",
     expiry_date: "",
   };
@@ -20,7 +26,8 @@ const PaymentForm = (props) => {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    handleSubmit();
+    handleSubmit(payment);
+    setPayment({});
   };
 
   return (
@@ -36,10 +43,15 @@ const PaymentForm = (props) => {
           onChange={onChange}
           required
         />
-        <select name="payment_type">
-          <option value="credit">Credit</option>
-          <option value="debit">Debit</option>
-        </select>
+        <input
+          className="formInput"
+          name="payment_type"
+          type="text"
+          placeholder="Payment Type"
+          value={payment_type}
+          onChange={onChange}
+          required
+        />
         <input
           className="formInput"
           name="card_number"
@@ -52,7 +64,7 @@ const PaymentForm = (props) => {
         <input
           className="formInput"
           name="expiry_date"
-          type="number"
+          type="text"
           placeholder="Expiration"
           value={expiry_date}
           onChange={onChange}
