@@ -19,7 +19,7 @@ app.use("/api/users", require("./routes/users"));
 app.use("/api/auth", require("./routes/auth"));
 
 app.get("/display", (req, res) => {
-  db.query("SELECT * FROM Vehicles", (err, result) => {
+  db.query("SELECT * FROM Vehicles WHERE available = 0", (err, result) => {
     if (err) {
       console.log(err);
     } else {
@@ -78,10 +78,88 @@ app.post("/removevehicle", auth, (req, res) => {
   );
 });
 
-app.post("/rentCars", (req, res) => {
-  const user_id = req.body.user_id;
+app.post("/rentCars1", (req, res) => {
+  const owner_id = req.body.owner_id;
+  const renter_id = req.body.renter_id;
   const vehicle_id = req.body.vehicle_id;
-  db.query();
+  const start_date = req.body.start_date;
+  const miles = req.body.miles;
+  db.query(
+    "INSERT INTO Rentals (owner_id, vehicle_id, renter_id, miles, start_date) VALUES (?, ?, ?, ?, ?);",
+    [owner_id, vehicle_id, renter_id, miles, start_date],
+    (err, result) => {
+      if (err) {
+        console.log(err);
+      } else {
+        res.send(result);
+      }
+    }
+  );
+});
+
+app.post("/rentCars2", (req, res) => {
+  const vehicle_id = req.body.vehicle_id;
+  db.query(
+    "UPDATE Vehicles SET status = 'active', available = 1 WHERE vehicle_id = ?;",
+    [vehicle_id],
+    (err, result) => {
+      if (err) {
+        console.log(err);
+      } else {
+        res.send(result);
+      }
+    }
+  );
+});
+
+app.post("/displayRented", (req, res) => {
+  const user_id = req.body.user_id;
+  db.query(
+    "SELECT * FROM Rentals r LEFT JOIN Vehicles v ON v.vehicle_id=r.vehicle_id WHERE r.renter_id = ? AND r.end_date IS NULL;",
+    [user_id],
+    (err, result) => {
+      if (err) {
+        console.log(err);
+      } else {
+        res.send(result);
+      }
+    }
+  );
+});
+
+app.post("/return", (req, res) => {
+  const end_date = req.body.end_date;
+  const rental_id = req.body.rental_id;
+  db.query(
+    "CALL finalizeRentalCost(?, ?);",
+    [end_date, rental_id],
+    (err, result) => {
+      if (err) {
+        console.log(err);
+      } else {
+        res.send(result);
+      }
+    }
+  );
+});
+
+app.post("/review", (req, res) => {
+  const review = req.body.review;
+  const vehicle_id = req.body.vehicle_id;
+  const rating = req.body.rating;
+  const user_id = req.body.user_id;
+
+  db.query(
+    "INSERT INTO Reviews (vehicle_id, user_id, rating, review) VALUES (?, ?, ?, ?);",
+    [vehicle_id, user_id, rating, review],
+    (err, result) => {
+      if (err) {
+        console.log(err);
+      } else {
+        res.send(result);
+      }
+    }
+  );
 });
 
 app.listen(3001, () => {

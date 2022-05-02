@@ -7,6 +7,7 @@ const Display = ({
     user_id
 }) => {
     const [availableCars, setAvailableCars] = useState([]);
+    const [userId, setUserID] = useState(138);
     //const [selectedCar, setSelectedCar] = useState();
     const getCars = () => {
         Axios.get('http://localhost:3001/display').then((response) => {
@@ -20,14 +21,22 @@ const Display = ({
     };
     
     const rentCars = (val) => {
-        Axios.post('http://localhost:3001/rentCars', {
-            renter_id: user_id,
+        const date = new Date();
+        Axios.post('http://localhost:3001/rentCars1', {
+            renter_id: userId,
             vehicle_id: val.vehicle_id,
-            owner_id: val.user_id
+            owner_id: val.user_id,
+            start_date: date,
+            miles: val.mileage
         }).then((response) => {
             console.log(response);
         });
-        console.log(val.vehicle_id);
+        Axios.post('http://localhost:3001/rentCars2', {
+            vehicle_id: val.vehicle_id,
+        }).then((response) => {
+            console.log(response);
+        });
+        //console.log(val.vehicle_id);
     };
     
     return (
@@ -46,7 +55,7 @@ const Display = ({
                             </button>
                         </div>  
                     );
-                })}
+                })} 
             </div>
         </div>
     )
