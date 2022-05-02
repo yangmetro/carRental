@@ -17,6 +17,7 @@ app.use(express.json());
 
 app.use("/api/users", require("./routes/users"));
 app.use("/api/auth", require("./routes/auth"));
+app.use("/api/payments", require("./routes/payments"));
 
 app.get("/display", (req, res) => {
   db.query("SELECT * FROM Vehicles WHERE available = 0", (err, result) => {
