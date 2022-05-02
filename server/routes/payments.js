@@ -21,7 +21,7 @@ router.get("/", auth, (req, res) => {
   );
 });
 
-// @route   POST api/auth
+// @route   POST api/payments
 // @desc    Add a new payment
 // @access  Private
 router.post("/", auth, async (req, res) => {
@@ -42,6 +42,44 @@ router.post("/", auth, async (req, res) => {
       }
 
       res.json(result.insertId);
+    }
+  );
+});
+
+// @route   PUT api/payments/:id
+// @desc    Update a payment
+// @access  Private
+router.put("/:id", auth, async (req, res) => {
+  const { payment_type, card_number, expiry_date } = req.body;
+
+  db.query(
+    "UPDATE Payments SET payment_type = ?, card_number = ?, expiry_date = ? WHERE payment_id = ? AND user_id = ?;",
+    [payment_type, card_number, expiry_date, req.params.id, req.user.user_id],
+    (err, result) => {
+      if (err) {
+        console.error(err.message);
+        return res.status(500).send("Server Error");
+      }
+
+      res.json(result);
+    }
+  );
+});
+
+// @route   DELETE api/payments/:id
+// @desc    Delete a payment
+// @acess   Private
+router.delete("/:id", auth, async (req, res) => {
+  db.query(
+    "DELETE FROM Payments WHERE payment_id = ? AND user_id = ?",
+    [req.params.id, req.user.user_id],
+    (err, result) => {
+      if (err) {
+        console.error(err.message);
+        return res.status(500).send("Server Error");
+      }
+
+      res.json(result);
     }
   );
 });
