@@ -26,15 +26,15 @@ router.get("/", auth, (req, res) => {
 // @access  Private
 router.post("/", auth, async (req, res) => {
   const user_id = req.user.user_id;
-  const { payment_type, card_number, expiry_date } = req.body;
+  const { payment_name, payment_type, card_number, expiry_date } = req.body;
 
   if (!payment_type || !card_number || !expiry_date) {
     return res.status(400).json({ msg: "All fields required" });
   }
 
   db.query(
-    "INSERT INTO Payments (user_id, payment_type, card_number, expiry_date) VALUES (?, ?, ?, ?);",
-    [user_id, payment_type, card_number, expiry_date],
+    "INSERT INTO Payments (user_id, payment_name, payment_type, card_number, expiry_date) VALUES (?, ?, ?, ?, ?);",
+    [user_id, payment_name, payment_type, card_number, expiry_date],
     async (err, result) => {
       if (err) {
         console.error(err.message);

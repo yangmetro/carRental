@@ -19,14 +19,20 @@ app.use("/api/users", require("./routes/users"));
 app.use("/api/auth", require("./routes/auth"));
 app.use("/api/payments", require("./routes/payments"));
 
-app.get("/display", (req, res) => {
-  db.query("SELECT * FROM Vehicles WHERE available = 0", (err, result) => {
-    if (err) {
-      console.log(err);
-    } else {
-      res.send(result);
+app.get("/display", auth, (req, res) => {
+  const user_id = req.user.user_id;
+
+  db.query(
+    "SELECT * FROM Vehicles WHERE available = 0 AND user_id != ?",
+    [user_id],
+    (err, result) => {
+      if (err) {
+        console.log(err);
+      } else {
+        res.send(result);
+      }
     }
-  });
+  );
 });
 
 app.post("/addvehicle", auth, (req, res) => {
@@ -79,9 +85,25 @@ app.post("/removevehicle", auth, (req, res) => {
   );
 });
 
-app.post("/rentCars1", (req, res) => {
+app.post("/ownedVehicles", auth, (req, res) => {
+  const user_id = req.user.user_id;
+  console.log(user_id);
+  db.query(
+    "SELECT * FROM Vehicles WHERE user_id = ?;",
+    [user_id],
+    (err, result) => {
+      if (err) {
+        console.log(err);
+      } else {
+        res.send(result);
+      }
+    }
+  );
+});
+
+app.post("/rentCars1", auth, (req, res) => {
   const owner_id = req.body.owner_id;
-  const renter_id = req.body.renter_id;
+  const renter_id = req.user.user_id;
   const vehicle_id = req.body.vehicle_id;
   const start_date = req.body.start_date;
   const miles = req.body.miles;
@@ -113,8 +135,8 @@ app.post("/rentCars2", (req, res) => {
   );
 });
 
-app.post("/displayRented", (req, res) => {
-  const user_id = req.body.user_id;
+app.post("/displayRented", auth, (req, res) => {
+  const user_id = req.user.user_id;
   db.query(
     "SELECT * FROM Rentals r LEFT JOIN Vehicles v ON v.vehicle_id=r.vehicle_id WHERE r.renter_id = ? AND r.end_date IS NULL;",
     [user_id],
@@ -144,11 +166,11 @@ app.post("/return", (req, res) => {
   );
 });
 
-app.post("/review", (req, res) => {
+app.post("/review", auth, (req, res) => {
   const review = req.body.review;
   const vehicle_id = req.body.vehicle_id;
   const rating = req.body.rating;
-  const user_id = req.body.user_id;
+  const user_id = req.user.user_id;
 
   db.query(
     "INSERT INTO Reviews (vehicle_id, user_id, rating, review) VALUES (?, ?, ?, ?);",

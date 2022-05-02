@@ -6,6 +6,8 @@ import Login from "../Login/Login.js";
 import Display from "../Display/Display.js";
 import AddVehicle from "../AddVehicle/AddVehicle.js";
 import RemoveVehicle from "../RemoveVehicle/RemoveVehicle.js";
+import OwnedVehicle from "../ownedVehicles/ownedVehicles";
+import ReturnVehicle from "../ReturnVehicle/ReturnVehicle";
 import Payments from "../Payments/Payments";
 import { Routes, Route } from "react-router-dom";
 import AuthState from "../../context/auth/AuthState";
@@ -22,6 +24,8 @@ function App() {
           <Route exact path="/addvehicle" element={<AddVehicle />} />
           <Route exact path="/removevehicle" element={<RemoveVehicle />} />
           <Route exact path="/payments" element={<Payments />} />
+          <Route exact path="/ownedvehicles" element={<OwnedVehicle />} />
+          <Route exact path="/returnvehicle" element={<ReturnVehicle />} />
         </Routes>
       </div>
     </AuthState>

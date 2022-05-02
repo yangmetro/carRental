@@ -17,10 +17,16 @@ const Navbar = () => {
   const protectedLinks = (
     <Fragment>
       <li>
+        <Link to="/returnvehicle">Return Vehicle</Link>
+      </li>
+      <li>
         <Link to="/addvehicle">Add Vehicle</Link>
       </li>
       <li>
         <Link to="/removevehicle">Remove Vehicle</Link>
+      </li>
+      <li>
+        <Link to="/ownedvehicles">My Vehicles</Link>
       </li>
       <li>
         <Link to="/payments">Payments</Link>

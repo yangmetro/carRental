@@ -14,6 +14,7 @@ const Payments = () => {
   const addPayment = async (payment) => {
     let res = await axios.post("http://localhost:3001/api/payments", payment);
     setPayments([...payments, payment]);
+    setShowForm(false);
   };
 
   const updatePayment = () => {
@@ -22,6 +23,10 @@ const Payments = () => {
 
   const deletePayments = () => {
     // Delete request
+  };
+
+  const addForm = () => {
+    setShowForm(true);
   };
 
   useEffect(() => {
@@ -38,7 +43,7 @@ const Payments = () => {
         return (
           <Payment
             key={p.payment_id}
-            name="Payment"
+            name={p.payment_name}
             payment_type={p.payment_type}
             card_number={p.card_number}
             expiry_date={p.expiry_date}
@@ -48,7 +53,11 @@ const Payments = () => {
       {showForm && (
         <PaymentForm submitLabel="Save payment" handleSubmit={addPayment} />
       )}
-      {!showForm && <button className="submitButton">Add New Payment</button>}
+      {!showForm && (
+        <button className="submitButton" onClick={addForm}>
+          Add New Payment
+        </button>
+      )}
     </div>
   );
 };

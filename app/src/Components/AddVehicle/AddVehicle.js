@@ -29,6 +29,7 @@ const AddVehicle = () => {
     }).then((response) => {
       console.log(response);
     });
+    window.location.href = "http://localhost:3000/carRental/ownedvehicles";
   };
 
   return (

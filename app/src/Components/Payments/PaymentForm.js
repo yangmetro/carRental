@@ -1,12 +1,7 @@
 import React, { useState } from "react";
 
 const PaymentForm = (props) => {
-  const {
-    submitLabel,
-    handleSubmit,
-    hasCancelButton = false,
-    handleCancel,
-  } = props;
+  const { handleSubmit } = props;
 
   // Initial State
   const initialPayment = {
@@ -64,7 +59,7 @@ const PaymentForm = (props) => {
         <input
           className="formInput"
           name="expiry_date"
-          type="text"
+          type="date"
           placeholder="Expiration"
           value={expiry_date}
           onChange={onChange}
