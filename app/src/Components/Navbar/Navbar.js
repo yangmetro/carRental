@@ -23,7 +23,7 @@ const Navbar = () => {
         <Link to="/removevehicle">Remove Vehicle</Link>
       </li>
       <li>
-        <Link to="">Payments</Link>
+        <Link to="/payments">Payments</Link>
       </li>
       <li>
         <Link onClick={onLogout} to="/login">
